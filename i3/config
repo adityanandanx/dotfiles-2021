@@ -1,0 +1,194 @@
+# set modifier
+set $super Mod4
+set $alt Mod1
+
+# set font
+font pango: Quicksand 8
+
+# Use Mouse+$super to drag floating windows to their wanted position
+floating_modifier $super
+
+#autostart
+exec --no-startup-id hsetroot -cover ~/wallpapers/mountains2.*
+# exec --no-startup-id ~/.conky/Clock-With-Weather-Conky/scripts/start.sh
+exec --no-startup-id xsettingsd &
+exec --no-startup-id picom
+exec --no-startup-id dunst
+exec --no-startup-id discord
+exec --no-startup-id chromium
+exec --no-startup-id glava --desktop
+exec --no-startup-id conky
+exec --no-startup-id ./.config/polybar/launch.sh --panels
+
+# start a terminal
+bindsym $super+Return exec --no-startup-id alacritty
+bindsym $super+Shift+Return exec --no-startup-id alacritty -t "Alacritty-floating"
+
+# start neovide
+bindsym $super+Shift+c exec --no-startup-id neovide
+
+# Show rofi-wifi-menu
+bindsym $super+Shift+w exec --no-startup-id rofi-wifi-menu
+
+# start dmenu (a program launcher)
+bindsym $super+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"
+bindsym $super+d exec rofi --no-startup-id -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 8'
+
+# common apps keybinds
+bindsym Print exec --no-startup-id flameshot gui
+bindsym $super+l exec --no-startup-id i3lock -i ~/.local/share/wallpapers/ArchPurple.png
+bindsym $super+Shift+n exec --no-startup-id thunar
+
+#change volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 5%-
+bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
+
+# music control
+bindsym XF86AudioNext exec --no-startup-id mpc next
+bindsym XF86AudioPrev exec --no-startup-id mpc prev
+bindsym XF86AudioPlay exec --no-startup-id mpc toggle
+bindsym XF86AudioStop exec --no-startup-id mpc stop
+
+# Spotify related key bindings
+bindsym $alt+Shift+space exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+bindsym $alt+Shift+z exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym $alt+Shift+x exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+
+# kill focused window
+bindsym $super+c kill
+bindsym $alt+F4 kill
+
+# change focus
+bindsym $super+Left focus left
+bindsym $super+Down focus down
+bindsym $super+Up focus up
+bindsym $super+Right focus right
+
+# move focused window
+bindsym $super+Shift+Left move left
+bindsym $super+Shift+Down move down
+bindsym $super+Shift+Up move up
+bindsym $super+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $super+h split h
+
+# split in vertical orientation
+bindsym $super+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $super+f fullscreen toggle
+
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $super+e layout stacking
+bindsym $super+w layout tabbed
+bindsym $super+s layout toggle split
+
+
+# toggle tiling / floating
+bindsym $super+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $super+Shift+space focus mode_toggle
+
+# switch to workspace
+bindsym $alt+Control+Right workspace next
+bindsym $alt+Control+Left workspace prev
+bindsym $super+1 workspace 1
+bindsym $super+2 workspace 2
+bindsym $super+3 workspace 3
+bindsym $super+4 workspace 4
+bindsym $super+5 workspace 5
+bindsym $super+6 workspace 6
+
+# move focused container to workspace
+bindsym $super+Shift+1 move container to workspace 1
+bindsym $super+Shift+2 move container to workspace 2
+bindsym $super+Shift+3 move container to workspace 3
+bindsym $super+Shift+4 move container to workspace 4
+bindsym $super+Shift+5 move container to workspace 5
+bindsym $super+Shift+6 move container to workspace 6
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $super+Shift+r restart
+
+# exit i3
+bindsym $super+q exec --no-startup-id "i3-nagbar -t warning -m 'Really, exit?' -b 'Yes' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
+        bindsym Return mode "default"
+}
+bindsym $super+r mode "resize"
+
+border_radius 3
+# gaps
+gaps inner 10
+gaps top 30
+
+# panel
+#bar {
+#    position top
+#        colors {
+#        background #282a3600
+#        statusline #2f343f
+#        separator #888CA6
+#
+#        # colour of border, background, and text
+#        focused_workspace       #2f343f00 #BB91F7 #000000
+#        active_workspace        #2f343f00 #2f343f #d8dee8
+#        inactive_workspace      #2f343f00 #282a36 #d8dee8
+#        urgent_workspace        #2f343f #ebcb8b #2f343f
+#    }
+#        status_command i3status
+#    i3bar_command i3bar --transparency
+#}
+
+#bar {
+#  position top
+#  colors {
+#    background #282A3600
+#    statusline #F8F8F2
+#    separator  #44475A
+#
+#    # colour of border, background, and text
+#    focused_workspace  #44475A #44475A #F8F8F2
+#    active_workspace   #282A36 #44475A #F8F8F2
+#    inactive_workspace #282A36 #282A36 #BFBFBF
+#    urgent_workspace   #FF5555 #FF5555 #F8F8F2
+#    binding_mode       #FF5555 #FF5555 #F8F8F2
+#  }
+#  status_command i3status
+#  i3bar_command i3bar --transparency
+#}
+
+# window rules, you can find the window class using xprop
+for_window [class=".*"] border pixel 0
+assign [class=Chromium|Firefox] 1
+assign [class=zoom*|code-oss|Transmission-gtk] 2
+assign [class=evince|discord|File-roller] 3
+assign [class=spotify*|Geany|Evince|Gucharmap|Soffice|libreoffice*] 4
+assign [class=Audacity|Vlc|mpv|Ghb|Xfburn|Gimp*|Inkscape] 5
+assign [class=Lxappearance|System-config-printer.py|Lxtask|GParted|Pavucontrol|Exo-helper*|Lxrandr|Arandr] 6
+assign [instance="Spotify"] 4
+for_window [class=Godot_Engine*|Viewnior|feh|Audacious|File-roller|Lxappearance|Lxtask|Pavucontrol] floating enable
+for_window [class=URxvt|Firefox|Geany|Evince|Soffice|libreoffice*|mpv|Ghb|Xfburn|Gimp*|Inkscape|Vlc|Lxappearance|Audacity] focus
+for_window [class=Xfburn|GParted|System-config-printer.py|Lxtask|Pavucontrol|Exo-helper*|Lxrandr|Arandr] focus
+for_window [instance="Godot_Engine"] floating enable
+for_window [title="Alacritty-floating"] floating enable
+for_window [instance="peek"] sticky enable
+
+
+# colour of border, background, text, indicator, and child_border
+client.focused              #BB91F7 #BB91F7 #d8dee8 #bf616a #bb91f7
+client.focused_inactive     #BB91F7 #BB91F7 #d8dee8 #BB91F7 #d4d4d4
+client.unfocused            #BB91F7 #BB91F7 #d8dee8 #BB91F7 #d4d4d4
+client.urgent               #BB91F7 #BB91F7 #d8dee8 #BB91F7 #BB91F7
+client.placeholder          #BB91F7 #BB91F7 #d8dee8 #BB91F7 #BB91F7
+client.background           #BB91F7
